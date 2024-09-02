@@ -1,0 +1,306 @@
+@font-face {
+    font-family: 'NintendoFont';
+    src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+}
+
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #45a049;
+    --text-color: #ffffff;
+    --background-color: #000000;
+    --card-background: #1a1a1a;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'NintendoFont', monospace;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    image-rendering: pixelated;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.3em; }
+h3 { font-size: 1.1em; }
+
+.content {
+    background-color: var(--card-background);
+    border: 2px solid var(--primary-color);
+    padding: 15px;
+    margin-top: 60px;
+    box-shadow: 4px 4px 0 rgba(76, 175, 80, 0.5);
+}
+
+input[type="text"], select {
+    width: calc(100% - 24px);
+    padding: 8px;
+    margin: 5px 0;
+    border: 2px solid var(--secondary-color);
+    background-color: #2a2a2a;
+    color: var(--text-color);
+    font-family: 'NintendoFont', monospace;
+    font-size: 0.9em;
+}
+
+button {
+    padding: 8px 16px;
+    margin: 5px 0;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    font-family: 'NintendoFont', monospace;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 0 #000;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 #000;
+}
+
+button:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 #000;
+}
+
+.plan, .coin {
+    background-color: var(--card-background);
+    border: 2px solid var(--secondary-color);
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+    box-shadow: 4px 4px 0 rgba(69, 160, 73, 0.5);
+}
+
+.plan:hover, .coin:hover {
+    transform: scale(1.02);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--card-background);
+    border: 2px solid var(--primary-color);
+    padding: 20px;
+    box-shadow: 4px 4px 0 rgba(76, 175, 80, 0.5);
+    z-index: 1000;
+    max-width: 90%;
+    width: 300px;
+}
+
+.close-popup {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 18px;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.coin-symbol {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    width: 100%;
+    font-size: 0.8em;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    background-color: var(--card-background);
+    border: 1px solid var(--secondary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.transaction-history {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+#countdown {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: 1px 1px 0 #000;
+}
+
+.tetris-block {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+    opacity: 0.5;
+    z-index: -1;
+    animation: tetrisFall 10s linear infinite;
+}
+
+@keyframes tetrisFall {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes buttonPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+button {
+    animation: buttonPulse 2s infinite;
+}
+
+.secure-icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    margin-right: 5px;
+    position: relative;
+}
+
+.secure-icon::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--background-color);
+    font-weight: bold;
+    font-size: 10px;
+}
+
+#walletPage {
+    padding: 10px;
+}
+
+.address {
+    word-break: break-all;
+    font-size: 0.8em;
+}
+
+.wallet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.coin {
+    width: calc(50% - 5px);
+    margin-bottom: 10px;
+}
+
+#notificationButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'NintendoFont', monospace;
+    font-size: 0.9em;
+}
+
+#notificationPopup {
+    position: fixed;
+    top: 50px;
+    right: 10px;
+    background-color: var(--card-background);
+    border: 2px solid var(--primary-color);
+    padding: 10px;
+    display: none;
+    z-index: 1000;
+    font-family: 'NintendoFont', monospace;
+    font-size: 0.9em;
+}
+
+@media (min-width: 768px) {
+    body, html {
+        font-size: 16px;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .plan {
+        width: calc(33.33% - 20px);
+        display: inline-block;
+        margin: 10px;
+    }
+
+    .coin {
+        width: calc(25% - 15px);
+    }
+
+    .popup {
+        width: 400px;
+    }
+
+    table {
+        font-size: 1em;
+    }
+}
