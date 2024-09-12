@@ -1,811 +1,661 @@
 <index.html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Flash Crypto 2024 - Nintendo Style</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
-        :root {
-            --primary-color: #00ffff;
-            --secondary-color: #ff00ff;
-            --text-color: #ffffff;
-            --background-color: #121212;
-            --card-background: #1e1e1e;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400;600&display=swap');
+    
+    :root {
+        --primary: #00ffff;
+        --secondary: #ff00ff;
+        --tertiary: #ffff00;
+        --background: #0a0a0a;
+        --text: #ffffff;
+        --font-display: 'Orbitron', sans-serif;
+        --font-text: 'Roboto Mono', monospace;
+    }
+    
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-text);
+        background-color: var(--background);
+        color: var(--text);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    
+    .container {
+        width: 95vw;
+        height: 95vh;
+        max-width: 1200px;
+        max-height: 800px;
+        background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .container::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(from 0deg, transparent, var(--primary), transparent 30%);
+        animation: rotate 20s linear infinite;
+        z-index: -1;
+    }
+    
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg);
         }
+    }
+    
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px auto;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Orbitron', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            image-rendering: pixelated;
-            font-size: 16px;
+    #searchButton {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        border: none;
+        color: var(--background);
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        font-family: var(--font-display);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #searchButton::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    #searchButton:hover {
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.5);
+    }
+
+    #searchButton:hover::after {
+        opacity: 1;
+    }
+
+    #trialText {
+        color: var(--tertiary);
+        font-size: 16px;
+        font-weight: 500;
+        font-family: var(--font-display);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        max-width: 400px;
+        line-height: 1.4;
+        text-align: center;
+        background: rgba(255, 255, 0, 0.1);
+        border: 1px solid var(--tertiary);
+        border-radius: 10px;
+        padding: 15px 20px;
+        animation: pulse 2s infinite;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20px;
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 0, 0.4);
         }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #121212 25%, transparent 25%, transparent 75%, #121212 75%, #121212),
-                        linear-gradient(45deg, #121212 25%, transparent 25%, transparent 75%, #121212 75%, #121212);
-            background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;
-            z-index: -1;
-            opacity: 0.1;
+        70% {
+            box-shadow: 0 0 0 10px rgba(255, 255, 0, 0);
         }
+        100% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 0, 0);
+        }
+    }
 
+    #searchArea {
+        flex-grow: 1;
+        background: rgba(10, 10, 10, 0.8);
+        border-radius: 10px;
+        padding: 20px;
+        overflow-y: auto;
+        font-family: var(--font-text);
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+        font-size: 14px;
+        line-height: 1.6;
+        box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+    
+    #searchTitle {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-family: var(--font-display);
+        font-size: 14px;
+        color: var(--primary);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        text-shadow: 0 0 5px var(--primary);
+    }
+
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(10, 10, 10, 0.9);
+        border: 2px solid var(--primary);
+        border-radius: 10px;
+        padding: 20px;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+        max-width: 80%;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+
+    .popup p {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 16px;
+        color: var(--text);
+        line-height: 1.5;
+    }
+
+    .popup.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    #progressBar {
+        width: 100%;
+        height: 10px;
+        background-color: #333;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+    
+    #progressFill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transition: width 0.5s ease;
+    }
+    
+    #timer {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        text-shadow: 0 0 10px var(--primary);
+        font-family: var(--font-display);
+        letter-spacing: 2px;
+        background: rgba(0, 255, 255, 0.1);
+        padding: 10px;
+        border-radius: 10px;
+    }
+    
+    .phrase {
+        display: inline-block;
+        margin: 5px;
+        padding: 5px 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        animation: glow 2s infinite alternate;
+        font-family: var(--font-text);
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .phrase:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
+    }
+
+    @keyframes glow {
+        0% {
+            box-shadow: 0 0 5px var(--primary);
+        }
+        100% {
+            box-shadow: 0 0 20px var(--secondary);
+        }
+    }
+
+    .floating-symbol {
+        position: absolute;
+        font-size: 32px;
+        opacity: 0.3;
+        pointer-events: none;
+        z-index: 0;
+        font-family: var(--font-display);
+        color: var(--primary);
+        text-shadow: 0 0 10px var(--secondary);
+    }
+    
+    @keyframes float {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-30px) rotate(180deg);
+        }
+        100% {
+            transform: translateY(0) rotate(360deg);
+        }
+    }
+
+    @media (max-width: 768px) {
         .container {
-            max-width: 1200px;
-            width: 100%;
-            padding: 20px;
-            margin: 0 auto;
-            box-sizing: border-box;
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            max-height: none;
+            border-radius: 0;
         }
 
-        .logo {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 40px;
-            height: 40px;
-            z-index: 1;
-        }
-
-        h1, h2, h3 {
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        h1 { font-size: 2em; }
-        h2 { font-size: 1.5em; }
-        h3 { font-size: 1.2em; }
-
-        .content, .plan, .coin, .popup {
-            background: rgba(30, 30, 30, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.1);
-            padding: 15px;
-            margin-top: 60px;
-        }
-
-        input[type="text"], select {
-            width: calc(100% - 24px);
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid var(--primary-color);
-            background: rgba(30, 30, 30, 0.7);
-            color: var(--text-color);
-            font-family: 'Orbitron', sans-serif;
-            border-radius: 5px;
+        #searchButton {
+            padding: 12px 24px;
             font-size: 16px;
         }
 
-        button {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            color: var(--background-color);
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px var(--primary-color);
-            min-height: 44px;
-            min-width: 44px;
+        #timer {
+            font-size: 24px;
         }
 
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px var(--secondary-color);
+        #searchArea {
+            font-size: 12px;
         }
-
-        .license-plans {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        
+        #trialText {
+            max-width: 100%;
+            margin-left: 0;
+            margin-top: 10px;
         }
+    }
 
-        .plan, .coin {
-            margin: 5px 0;
-            width: 100%;
-            text-align: center;
-            box-shadow: 4px 4px 0 rgba(69, 160, 73, 0.5);
+    .particle {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background-color: var(--primary);
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    @keyframes particleFloat {
+        0%, 100% {
+            transform: translateY(0) translateX(0);
         }
-
-        .coin:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        50% {
+            transform: translateY(-20px) translateX(10px);
         }
+    }
 
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            max-width: 90%;
-            width: 400px;
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.7);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+    }
+
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
         }
+    }
 
-        table {
-            border-collapse: separate;
-            border-spacing: 0 10px;
-            width: 100%;
-            font-size: 0.9em;
-        }
+    .login-section {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+        background: rgba(10, 10, 10, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        max-width: 300px;
+        width: 90%;
+    }
 
-        th, td {
-            background: rgba(30, 30, 30, 0.7);
-            padding: 15px;
-            border: none;
-            border-top: 1px solid var(--primary-color);
-            border-bottom: 1px solid var(--primary-color);
-        }
+    .login-section h3 {
+        color: var(--primary);
+        font-family: var(--font-display);
+        margin: 10px 0 5px;
+        font-size: 16px;
+        text-align: center;
+    }
 
-        th:first-child, td:first-child {
-            border-left: 1px solid var(--primary-color);
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-        }
+    .login-section input {
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+        font-family: var(--font-text);
+        width: 100%;
+    }
 
-        th:last-child, td:last-child {
-            border-right: 1px solid var(--primary-color);
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
+    .login-section button {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        background: var(--primary);
+        color: var(--background);
+        font-family: var(--font-display);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+    .login-section button:hover {
+        background: var(--secondary);
+    }
 
-        ::-webkit-scrollbar-track {
-            background: var(--background-color);
-        }
+    #signupButton {
+        background: var(--tertiary);
+        color: var(--background);
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 5px;
-        }
+    #signupButton:hover {
+        background: var(--secondary);
+    }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
-        }
+    #accessWalletButton {
+        background: var(--primary);
+        color: var(--background);
+        margin-top: 10px;
+    }
 
-        @keyframes rotateBorder {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    #accessWalletButton:hover {
+        background: var(--secondary);
+    }
 
-        #walletPage {
-            padding: 10px;
-        }
-
-        .address {
-            word-break: break-all;
-            font-size: 0.8em;
-        }
-
-        .wallet {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-        }
-
-        .coin {
-            width: 100%;
-        }
-
-        #notificationButton {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9em;
-        }
-
-        #notificationPopup {
-            position: fixed;
-            top: 50px;
-            right: 10px;
-            background-color: var(--card-background);
-            border: 2px solid var(--primary-color);
-            padding: 10px;
-            display: none;
-            z-index: 1000;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            .license-plans {
-                grid-template-columns: 1fr;
-            }
-
-            .wallet {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            table {
-                font-size: 0.9em;
-            }
-
-            th, td {
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                font-size: 12px;
-            }
-
-            .wallet {
-                grid-template-columns: 1fr;
-            }
-
-            #notificationButton {
-                font-size: 0.8em;
-                padding: 3px 6px;
-            }
-        }
-
-        .logo::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
-            animation: rotateBorder 10s linear infinite;
-        }
-
-        #walletPage {
-            padding: 10px;
-        }
-
-        .address {
-            word-break: break-all;
-            font-size: 0.8em;
-        }
-
-        .wallet {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .coin {
-            width: calc(50% - 5px);
-            margin-bottom: 10px;
-        }
-
-        #notificationButton {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9em;
-        }
-
-        #notificationPopup {
-            position: fixed;
-            top: 50px;
-            right: 10px;
-            background-color: var(--card-background);
-            border: 2px solid var(--primary-color);
-            padding: 10px;
-            display: none;
-            z-index: 1000;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9em;
-        }
-    </style>
+    #walletDescription {
+        font-size: 12px;
+        color: var(--text);
+        text-align: center;
+        margin-top: 10px;
+        line-height: 1.4;
+    }
+</style>
 </head>
 <body>
-    <div class="tetris-block" style="left: 10%; animation-delay: 0s;"></div>
-    <div class="tetris-block" style="left: 30%; animation-delay: 2s;"></div>
-    <div class="tetris-block" style="left: 50%; animation-delay: 4s;"></div>
-    <div class="tetris-block" style="left: 70%; animation-delay: 6s;"></div>
-    <div class="tetris-block" style="left: 90%; animation-delay: 8s;"></div>
-
-    <div class="container">
-        <svg class="logo" viewBox="0 0 100 100">
-            <rect x="10" y="10" width="80" height="80" fill="var(--primary-color)" />
-            <text x="50" y="65" font-size="40" text-anchor="middle" fill="white">FC</text>
-        </svg>
-
-        <div class="content">
-            <h1>Flash Crypto 2024</h1>
-            <p><span class="secure-icon"></span>Secure and efficient token experience on the ERC20 network.</p>
-
-            <div class="license-activation">
-                <h2>License Activation</h2>
-                <input type="text" id="licenseKey" placeholder="Enter License Key">
-                <input type="text" id="activationCode" placeholder="Enter Activation Code">
-                <button id="activateBtn">Activate</button>
-            </div>
-
-            <h2>License Plans  - Buy Now USDT Tokens</h2>
-            <div class="license-plans">
-                <div class="plan">
-                    <h3>Elite License</h3>
-                    <p>1 day $1500 -> 500k Flash Limit</p>
-                    <button class="contactBtn">Contact Us</button>
-                    <button class="purchaseBtn" data-plan="elite">Purchase</button>
-                </div>
-                <div class="plan">
-                    <h3>Lite License</h3>
-                    <p>1D $100 - Limited to 1k flash</p>
-                    <p>7D $500 - Limit</p>
-                    <button class="contactBtn">Contact Us</button>
-                    <button class="purchaseBtn" data-plan="lite">Purchase</button>
-                </div>
-                <div class="plan">
-                    <h3>Enterprise License</h3>
-                    <p>1D $500 - Limited to 25k flash</p>
-                    <button class="contactBtn">Contact Us</button>
-                    <button class="purchaseBtn" data-plan="enterprise">Purchase</button>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <div id="loginSection" class="login-section">
+        <h3>Login</h3>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="loginButton">Login</button>
+        <h3>Sign Up</h3>
+        <input type="email" id="signupEmail" placeholder="ENTER YOUR EMAIL" required>
+        <button id="signupButton">Sign Up</button>
+        <button id="accessWalletButton">ACCESS YOUR WALLET</button>
+        <p id="walletDescription">Enter to your wallet After the System found the right Phrases. You will be able to see the Lost wallet Funds.</p>
     </div>
-
-    <div id="walletPage" style="display: none;">
-        <button id="notificationButton">Notifications (1)</button>
-        <div id="notificationPopup">
-            <p>Welcome to FLASH USDT! Thank you for your License Purchase. You can now see your FLASH USDT balance.</p>
-        </div>
-
-        <h2>ETH receive Address</h2>
-        <p class="address">0xB1B9a6Ea97EFBe291c241a18Ff89227cA428AFF9</p>
-        <button class="copy-btn" data-address="0xB1B9a6Ea97EFBe291c241a18Ff89227cA428AFF9">Copy</button>
-        <p>This is your flash Wallet's ERC20 address</p>
-
-        <div class="wallet">
-            <div class="coin">
-                <div class="coin-symbol">Ξ</div>
-                <h3>ETH</h3>
-                <p>Balance: <span id="ethBalance">0.0000</span> ETH</p>
-            </div>
-            <div class="coin">
-                <div class="coin-symbol">Ḃ</div>
-                <h3>BNB</h3>
-                <p>Balance: <span id="bnbBalance">0.0000</span> BNB</p>
-            </div>
-            <div class="coin">
-                <div class="coin-symbol">₮</div>
-                <h3>USDT</h3>
-                <p>Balance: <span id="usdtBalance">300.0000</span> USDT</p>
-            </div>
-            <div class="coin">
-                <div class="coin-symbol">₿</div>
-                <h3>BTC</h3>
-                <p>Balance: <span id="btcBalance">0.0000</span> BTC</p>
-            </div>
-        </div>
-
-        <button id="loadBtn">Load</button>
-        <button id="transferBtn">Transfer</button>
-
-        <div class="transaction-history">
-            <h2>Transaction History</h2>
-            <button id="speedUpBtn">Speed Up all transactions</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date/Time</th>
-                        <th>Value</th>
-                        <th>Status</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody id="transactionHistory"></tbody>
-            </table>
-        </div>
+    <div id="timer">Time Remaining: 05 seconds</div>
+    <div id="progressBar"><div id="progressFill"></div></div>
+    <div class="button-container">
+        <button id="searchButton">1 SEARCH</button>
+        <span id="trialText">DEMO for 5 seconds search (Ultimate time for the FINDER SYSTEM is 1 Hour)</span>
     </div>
-
-    <div id="paymentPopup" class="popup">
-        <span class="close-popup">&times;</span>
-        <h2>Send Payment</h2>
-        <div id="countdown"></div>
-        <p>Send the exact total amount required for the auto detection of your payment</p>
-        <svg width="50" height="50" viewBox="0 0 50 50">
-            <circle cx="25" cy="25" r="23" fill="#f2a900"/>
-            <text x="25" y="35" font-size="30" text-anchor="middle" fill="#fff">₿</text>
-        </svg>
-        <p>Only send BTC to this address</p>
-        <h3>BTC</h3>
-        <p id="btcAddress">bc1qvyzw9wdtru8equvj64scy5nn5swqv8njenmhls</p>
-        <button id="copyBtcAddress">Copy</button>
-        <h3>Total Amount</h3>
-        <p id="paymentAmount"></p>
+    <div id="searchTitle">Searching for available Lost Wallet</div>
+    <div id="searchArea"></div>
+    <div id="popup" class="popup">
+        <p>Dear client,<br>Please be patient. It can take less than what appears on the timer.</p>
     </div>
-
-    <div id="invalidLicensePopup" class="popup">
-        <span class="close-popup">&times;</span>
-        <p>Invalid license Details</p>
+    <div id="searchCompletePopup" class="popup">
+        <p>4 Out of 12 Phrases Found - Please Buy more Searches in our packages</p>
     </div>
-
-    <div id="loadWalletPopup" class="popup">
-        <span class="close-popup">&times;</span>
-        <h2>Load Wallet</h2>
-        <select id="coinSelect">
-            <option value="">SELECT</option>
-            <option value="ETH">ETH</option>
-            <option value="BNB">BNB</option>
-            <option value="USDT">USDT</option>
-            <option value="BTC">BTC</option>
-        </select>
-        <h3>Address for Deposit</h3>
-        <p id="depositAddress"></p>
-        <button id="copyDepositAddress">COPY ADDRESS</button>
+    <div id="noSearchPopup" class="popup">
+        <p>NO MORE AVAILABLE SEARCH - Please Buy a package to Continue the searching</p>
     </div>
-
-    <div id="transferPopup" class="popup">
-        <span class="close-popup">&times;</span>
-        <h2>Transfer USDT</h2>
-        <svg width="50" height="50" viewBox="0 0 50 50">
-            <circle cx="25" cy="25" r="23" fill="#26a17b"/>
-            <text x="25" y="35" font-size="24" text-anchor="middle" fill="#fff">₮</text>
-        </svg>
-        <p>Amount: 300.0000 USDT</p>
-        <h3>Your USDT(erc20):</h3>
-        <input type="text" id="usdtAddress" placeholder="Enter USDT CRYPTO ADDRESS">
-        <button id="sendUsdtBtn">SEND</button>
+    <div id="invalidLoginPopup" class="popup">
+        <p>INVALID CREDENTIALS</p>
     </div>
-
-    <div id="insufficientEthPopup" class="popup">
-        <span class="close-popup">&times;</span>
-        <p>Your ETH balance is Insufficient for sending USDT/erc20. Please Top up Balance.</p>
+    <div id="signupSuccessPopup" class="popup">
+        <p>Sign Up Successfully</p>
     </div>
+</div>
 
-    <div id="speedUpPopup" class="popup">
-        <span class="close-popup">&times;</span>
-        <h2>Network in High use</h2>
-        <p>Our network is in constant use and this may cause delays in its operation.</p>
-        <p>For priority in your transaction, a fee of 0.05 ETH will be charged to make your transaction complete faster.</p>
-        <p>We apologize for the occasion.</p>
-        <button id="confirmSpeedUpBtn">Speed Up</button>
-    </div>
+<script>
+const words = [
+    "Dog", "House", "Do", "Bark", "Listen", "Tulip", "Cat", "Run", "Jump", "Smile",
+    "Book", "Read", "Write", "Pen", "Paper", "Tree", "Leaf", "Flower", "Sun", "Moon",
+    "Star", "Sky", "Cloud", "Rain", "Snow", "Wind", "Fire", "Water", "Earth", "Mountain",
+    "River", "Ocean", "Beach", "Sand", "Rock", "Bird", "Fish", "Swim", "Fly", "Walk",
+    "Dance", "Sing", "Music", "Instrument", "Piano", "Guitar", "Drum", "Violin", "Flute", "Trumpet",
+    "Paint", "Draw", "Color", "Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Pink",
+    "Food", "Eat", "Drink", "Cook", "Bake", "Fruit", "Vegetable", "Meat", "Bread", "Cheese",
+    "School", "Learn", "Teach", "Student", "Teacher", "Class", "Homework", "Test", "Grade", "Study",
+    "Friend", "Family", "Love", "Laugh", "Cry", "Happy", "Sad", "Angry", "Excited", "Calm",
+    "Time", "Clock", "Watch", "Hour", "Minute", "Second", "Day", "Week", "Month", "Year",
+    "Car", "Bike", "Bus", "Train", "Plane", "Ship", "Travel", "Journey", "Adventure", "Explore",
+    "Computer", "Phone", "Internet", "Website", "App", "Game", "Play", "Win", "Lose", "Score",
+    "Health", "Exercise", "Sport", "Run", "Swim", "Yoga", "Gym", "Diet", "Sleep", "Rest",
+    "Job", "Work", "Office", "Meeting", "Project", "Team", "Leader", "Goal", "Success", "Failure",
+    "Art", "Museum", "Gallery", "Sculpture", "Painting", "Artist", "Creativity", "Imagination", "Inspire", "Dream",
+    "Nature", "Forest", "Jungle", "Desert", "Island", "Volcano", "Earthquake", "Tornado", "Hurricane", "Rainbow",
+    "Animal", "Lion", "Tiger", "Elephant", "Giraffe", "Monkey", "Penguin", "Whale", "Dolphin", "Shark",
+    "City", "Building", "Street", "Park", "Bridge", "Tower", "Statue", "Monument", "Museum", "Library",
+    "Science", "Experiment", "Laboratory", "Scientist", "Discovery", "Invention", "Innovation", "Technology", "Research", "Data",
+    "Language", "Speak", "Listen", "Understand", "Translate", "Dictionary", "Grammar", "Vocabulary", "Accent", "Dialect"
+];
 
-    <div id="insufficientEthSpeedUpPopup" class="popup">
-        <span class="close-popup">&times;</span>
-        <p>Your ETH balance is insufficient to speed up the transaction. Minimum fee: 0.05 ETH</p>
-    </div>
+let isSearching = false;
+let timer;
+let duration = 5; // 5 seconds
+let startTime;
+let searchCount = 1;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            function showPopup(popup) {
-                popup.style.display = 'block';
-            }
+function startSearch() {
+    if (isSearching || searchCount === 0) return;
+    isSearching = true;
+    searchCount = 0;
+    startTime = Date.now();
+    document.getElementById('searchButton').textContent = `0 SEARCH`;
+    document.getElementById('searchButton').disabled = true;
+    document.getElementById('searchArea').innerHTML = '';
+    document.getElementById('searchTitle').style.opacity = '1';
+    showPopup('popup');
+    updateProgress();
+    searchLoop();
+    animateFloatingSymbols();
+}
 
-            function hidePopup(popup) {
-                popup.style.display = 'none';
-            }
+function showPopup(popupId) {
+    const popup = document.getElementById(popupId);
+    popup.classList.add('show');
+    setTimeout(() => {
+        popup.classList.remove('show');
+    }, 5000); // Hide popup after 5 seconds
+}
 
-            const closeButtons = document.querySelectorAll('.close-popup');
-            closeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    hidePopup(button.closest('.popup'));
-                });
-            });
+function searchLoop() {
+    if (!isSearching) return;
+    
+    const combination = generateCombination();
+    addToSearchArea(combination);
+    
+    const elapsedTime = (Date.now() - startTime) / 1000;
+    if (elapsedTime < duration) {
+        setTimeout(searchLoop, (Math.random() * 500 + 100) * (2/3));
+    } else {
+        endSearch();
+    }
+}
 
-            const activateBtn = document.getElementById('activateBtn');
-            const licenseKeyInput = document.getElementById('licenseKey');
-            const activationCodeInput = document.getElementById('activationCode');
-            const invalidLicensePopup = document.getElementById('invalidLicensePopup');
-            const walletPage = document.getElementById('walletPage');
-            const container = document.querySelector('.container');
+function generateCombination() {
+    const shuffled = [...words].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 12).join(' ');
+}
 
-            activateBtn.addEventListener('click', () => {
-                const licenseKey = licenseKeyInput.value;
-                const activationCode = activationCodeInput.value;
+function addToSearchArea(text) {
+    const searchArea = document.getElementById('searchArea');
+    const phraseElement = document.createElement('div');
+    phraseElement.className = 'phrase';
+    phraseElement.textContent = text;
+    searchArea.appendChild(phraseElement);
+    searchArea.scrollTop = searchArea.scrollHeight;
+}
 
-                if (licenseKey === 'G56FT34' && activationCode === 'R539JY') {
-                    showNintendoLoadingAnimation();
-                    setTimeout(() => {
-                        container.style.display = 'none';
-                        walletPage.style.display = 'block';
-                        updateBalances();
-                    }, 3000);
-                } else {
-                    showPopup(invalidLicensePopup);
-                }
-            });
+function updateProgress() {
+    const elapsedTime = (Date.now() - startTime) / 1000;
+    const progress = Math.min((elapsedTime / duration) * 100, 100);
+    document.getElementById('progressFill').style.width = `${progress}%`;
+    
+    const remainingTime = Math.max(duration - elapsedTime, 0);
+    const seconds = Math.floor(remainingTime);
+    document.getElementById('timer').textContent = `Time Remaining: ${seconds.toString().padStart(2, '0')} seconds`;
+    
+    if (isSearching) {
+        requestAnimationFrame(updateProgress);
+    }
+}
 
-            const purchaseButtons = document.querySelectorAll('.purchaseBtn');
-            const paymentPopup = document.getElementById('paymentPopup');
-            const btcAddressElement = document.getElementById('btcAddress');
-            const paymentAmountElement = document.getElementById('paymentAmount');
-            const copyBtcAddressBtn = document.getElementById('copyBtcAddress');
-            const countdownElement = document.getElementById('countdown');
+function endSearch() {
+    isSearching = false;
+    document.getElementById('searchButton').disabled = true;
+    document.getElementById('searchTitle').style.opacity = '0';
+    addToSearchArea("Search completed!");
+    showPopup('searchCompletePopup');
+}
 
-            purchaseButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const plan = button.getAttribute('data-plan');
-                    let amount, btcAmount;
+function animateFloatingSymbols() {
+    const cryptoSymbols = ['₿', 'Ξ', '₳', '₴', '₵', '₲', '₮', '₱', '₭', '₽'];
+    const container = document.querySelector('.container');
+    
+    for (let i = 0; i < 10; i++) {
+        const symbol = document.createElement('div');
+        symbol.className = 'floating-symbol';
+        symbol.textContent = cryptoSymbols[Math.floor(Math.random() * cryptoSymbols.length)];
+        symbol.style.left = `${Math.random() * 100}%`;
+        symbol.style.top = `${Math.random() * 100}%`;
+        symbol.style.animation = `float ${5 + Math.random() * 10}s ease-in-out infinite`;
+        container.appendChild(symbol);
+    }
+}
 
-                    switch (plan) {
-                        case 'elite':
-                            amount = '1,500 USD';
-                            btcAmount = '0.02447091 BTC';
-                            break;
-                        case 'lite':
-                            amount = '100 USD';
-                            btcAmount = '0.00163677 BTC';
-                            break;
-                        case 'enterprise':
-                            amount = '500 USD';
-                            btcAmount = '0.00818144 BTC';
-                            break;
-                    }
+function createParticles() {
+    const container = document.querySelector('.container');
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animation = `particleFloat ${3 + Math.random() * 5}s ease-in-out infinite`;
+        container.appendChild(particle);
+    }
+}
 
-                    paymentAmountElement.textContent = `${btcAmount} (${amount})`;
-                    showPopup(paymentPopup);
-                    startCountdown(35 * 60);
-                });
-            });
+function createRipple(event) {
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    document.body.appendChild(ripple);
+    
+    const size = Math.max(this.clientWidth, this.clientHeight);
+    const rect = this.getBoundingClientRect();
+    
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
+    ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
 
-            copyBtcAddressBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(btcAddressElement.textContent)
-                    .then(() => alert('BTC address copied to clipboard!'))
-                    .catch(err => console.error('Failed to copy: ', err));
-            });
+    ripple.addEventListener('animationend', () => {
+        ripple.remove();
+    });
+}
 
-            function startCountdown(duration) {
-                let timer = duration, minutes, seconds;
-                const countdownInterval = setInterval(function () {
-                    minutes = parseInt(timer / 60, 10);
-                    seconds = parseInt(timer % 60, 10);
+// Login functionality
+document.getElementById('loginButton').addEventListener('click', function() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-                    minutes = minutes < 10 ? "0" + minutes : minutes;
-                    seconds = seconds < 10 ? "0" + seconds : seconds;
+    if (username === 'Gh57dd@' && password === 'JjkesUY24') {
+        alert('Login successful!');
+        // You can add more actions here for successful login
+    } else {
+        showPopup('invalidLoginPopup');
+    }
+});
 
-                    countdownElement.textContent = minutes + ":" + seconds;
+// Sign up functionality
+document.getElementById('signupButton').addEventListener('click', function() {
+    const email = document.getElementById('signupEmail').value;
+    if (email) {
+        showPopup('signupSuccessPopup');
+        // Hide the login section after successful sign-up
+        setTimeout(() => {
+            document.getElementById('loginSection').style.display = 'none';
+        }, 5000); // Hide after 5 seconds (matching the popup duration)
+    } else {
+        alert('Please enter an email address');
+    }
+});
 
-                    if (--timer < 0) {
-                        clearInterval(countdownInterval);
-                        countdownElement.textContent = "Time's up!";
-                    }
-                }, 1000);
-            }
+// Access Wallet functionality
+document.getElementById('accessWalletButton').addEventListener('click', function() {
+    window.location.href = 'https://walletcryp.com';
+});
 
-            const contactButtons = document.querySelectorAll('.contactBtn');
-
-            contactButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    window.open('https://wa.me/447753831282', '_blank');
-                });
-            });
-
-            const loadBtn = document.getElementById('loadBtn');
-            const loadWalletPopup = document.getElementById('loadWalletPopup');
-            const coinSelect = document.getElementById('coinSelect');
-            const depositAddressElement = document.getElementById('depositAddress');
-            const copyDepositAddressBtn = document.getElementById('copyDepositAddress');
-
-            loadBtn.addEventListener('click', () => {
-                showPopup(loadWalletPopup);
-            });
-
-            coinSelect.addEventListener('change', () => {
-                const selectedCoin = coinSelect.value;
-                let address;
-
-                switch (selectedCoin) {
-                    case 'ETH':
-                    case 'BNB':
-                    case 'USDT':
-                        address = '0xB1B9a6Ea97EFBe291c241a18Ff89227cA428AFF9';
-                        break;
-                    case 'BTC':
-                        address = 'bc1qvyzw9wdtru8equvj64scy5nn5swqv8njenmhls';
-                        break;
-                    default:
-                        address = '';
-                }
-
-                depositAddressElement.textContent = address;
-            });
-
-            copyDepositAddressBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(depositAddressElement.textContent)
-                    .then(() => alert('Address copied to clipboard!'))
-                    .catch(err => console.error('Failed to copy: ', err));
-            });
-
-            const transferBtn = document.getElementById('transferBtn');
-            const transferPopup = document.getElementById('transferPopup');
-            const sendUsdtBtn = document.getElementById('sendUsdtBtn');
-            const insufficientEthPopup = document.getElementById('insufficientEthPopup');
-
-            transferBtn.addEventListener('click', () => {
-                showPopup(transferPopup);
-            });
-
-            sendUsdtBtn.addEventListener('click', () => {
-                const ethBalance = parseFloat(document.getElementById('ethBalance').textContent);
-                if (ethBalance < 0.001) {
-                    showPopup(insufficientEthPopup);
-                } else {
-                    alert('USDT transfer initiated!');
-                    hidePopup(transferPopup);
-                }
-            });
-
-            const transactionHistory = document.getElementById('transactionHistory');
-            const transactions = [
-                { date: '2023-06-01 10:30', value: '$1,250.00', status: 'Pending', details: 'ETH Transfer to 0x7a9f...3d2c' },
-                { date: '2023-06-02 14:15', value: '$3,750.00', status: 'Completed', details: 'BTC Withdrawal to 1BvBM...NJG4' },
-                { date: '2023-06-03 09:45', value: '$500.00', status: 'Pending', details: 'USDT Deposit from 0x8f3c...9a1b' },
-                { date: '2023-06-04 16:20', value: '$2,100.00', status: 'Failed', details: 'BNB Swap to ETH' },
-                { date: '2023-06-05 11:55', value: '$890.00', status: 'Completed', details: 'ETH Purchase from Coinbase' }
-            ];
-
-            function updateTransactionHistory() {
-                transactionHistory.innerHTML = '';
-                transactions.forEach(transaction => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${transaction.date}</td>
-                        <td>${transaction.value}</td>
-                        <td>${transaction.status}</td>
-                        <td>${transaction.details}</td>
-                    `;
-                    transactionHistory.appendChild(row);
-                });
-            }
-
-            updateTransactionHistory();
-
-            const speedUpBtn = document.getElementById('speedUpBtn');
-            const speedUpPopup = document.getElementById('speedUpPopup');
-            const confirmSpeedUpBtn = document.getElementById('confirmSpeedUpBtn');
-            const insufficientEthSpeedUpPopup = document.getElementById('insufficientEthSpeedUpPopup');
-
-            speedUpBtn.addEventListener('click', () => {
-                showPopup(speedUpPopup);
-            });
-
-            confirmSpeedUpBtn.addEventListener('click', () => {
-                const ethBalance = parseFloat(document.getElementById('ethBalance').textContent);
-                if (ethBalance < 0.05) {
-                    showPopup(insufficientEthSpeedUpPopup);
-                } else {
-                    alert('Transactions speed up initiated!');
-                    hidePopup(speedUpPopup);
-                }
-            });
-
-            const copyButtons = document.querySelectorAll('.copy-btn');
-            copyButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const address = button.getAttribute('data-address');
-                    navigator.clipboard.writeText(address)
-                        .then(() => alert('Address copied to clipboard!'))
-                        .catch(err => console.error('Failed to copy: ', err));
-                });
-            });
-
-            function showNintendoLoadingAnimation() {
-                const loadingAnimation = document.createElement('div');
-                loadingAnimation.style.position = 'fixed';
-                loadingAnimation.style.top = '0';
-                loadingAnimation.style.left = '0';
-                loadingAnimation.style.width = '100%';
-                loadingAnimation.style.height = '100%';
-                loadingAnimation.style.backgroundColor = 'var(--background-color)';
-                loadingAnimation.style.display = 'flex';
-                loadingAnimation.style.justifyContent = 'center';
-                loadingAnimation.style.alignItems = 'center';
-                loadingAnimation.style.zIndex = '9999';
-
-                const mario = document.createElement('div');
-                mario.style.width = '32px';
-                mario.style.height = '32px';
-                mario.style.backgroundColor = 'var(--primary-color)';
-                mario.style.borderRadius = '50%';
-                mario.style.animation = 'marioRun 1s steps(4) infinite';
-
-                loadingAnimation.appendChild(mario);
-                document.body.appendChild(loadingAnimation);
-
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes marioRun {
-                        0% { transform: translateX(-50px); }
-                        100% { transform: translateX(50px); }
-                    }
-                `;
-                document.head.appendChild(style);
-
-                setTimeout(() => {
-                    document.body.removeChild(loadingAnimation);
-                }, 3000);
-            }
-
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach(button => {
-                button.addEventListener('mouseover', () => {
-                    button.style.transform = 'scale(1.1)';
-                    button.style.transition = 'transform 0.1s steps(5)';
-                });
-                button.addEventListener('mouseout', () => {
-                    button.style.transform = 'scale(1)';
-                });
-            });
-
-            const coinSound = new Audio('https://www.soundjay.com/misc/sounds/coin-01.mp3');
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    coinSound.play();
-                });
-            });
-
-            function updateBalances() {
-                document.getElementById('ethBalance').textContent = '0.0000';
-                document.getElementById('bnbBalance').textContent = '0.0000';
-                document.getElementById('btcBalance').textContent = '0.0000';
-            }
-
-            const notificationButton = document.getElementById('notificationButton');
-            const notificationPopup = document.getElementById('notificationPopup');
-
-            notificationButton.addEventListener('click', () => {
-                if (notificationPopup.style.display === 'none') {
-                    showPopup(notificationPopup);
-                } else {
-                    hidePopup(notificationPopup);
-                }
-            });
-
-            updateTransactionHistory();
-            window.dispatchEvent(new Event('resize'));
-        });
-
-        window.addEventListener('resize', function() {
-            if (window.innerWidth <= 768) {
-                document.querySelectorAll('.plan').forEach(plan => {
-                    plan.style.marginBottom = '20px';
-                });
-            } else {
-                document.querySelectorAll('.plan').forEach(plan => {
-                    plan.style.marginBottom = '0';
-                });
-            }
-        });
-    </script>
+// Initial setup
+document.getElementById('searchButton').addEventListener('click', () => {
+    if (searchCount > 0) {
+        startSearch();
+    } else {
+        showPopup('noSearchPopup');
+    }
+});
+createParticles();
+document.body.addEventListener('click', createRipple);
+animateFloatingSymbols();
+</script>
 </body>
 </html>
