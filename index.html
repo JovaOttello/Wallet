@@ -1,25 +1,25 @@
 <index.html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400;600&display=swap');
-    
     :root {
-        --primary: #00ffff;
-        --secondary: #ff00ff;
-        --tertiary: #ffff00;
-        --background: #0a0a0a;
-        --text: #ffffff;
+        --primary: #3498db;
+        --secondary: #2ecc71;
+        --tertiary: #f39c12;
+        --background: #1a1a1a;
+        --text: #ecf0f1;
         --font-display: 'Orbitron', sans-serif;
-        --font-text: 'Roboto Mono', monospace;
+        --font-text: 'Roboto', sans-serif;
     }
-    
+
     body, html {
         margin: 0;
         padding: 0;
         font-family: var(--font-text);
+        font-size: 16px;
+        line-height: 1.6;
         background-color: var(--background);
         color: var(--text);
         height: 100vh;
@@ -28,22 +28,22 @@
         align-items: center;
         overflow: hidden;
     }
-    
+
     .container {
         width: 95vw;
         height: 95vh;
         max-width: 1200px;
         max-height: 800px;
-        background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+        background: linear-gradient(135deg, #222, #333);
         border-radius: 20px;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         display: flex;
         flex-direction: column;
         padding: 20px;
         position: relative;
         overflow: hidden;
     }
-    
+
     .container::before {
         content: '';
         position: absolute;
@@ -55,23 +55,22 @@
         animation: rotate 20s linear infinite;
         z-index: -1;
     }
-    
+
     @keyframes rotate {
         100% {
             transform: rotate(360deg);
         }
     }
-    
+
     .button-container {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         margin: 20px auto;
         flex-wrap: wrap;
-        gap: 20px;
     }
 
-    #searchButton {
+    #searchButton, #signInButton {
         background: linear-gradient(45deg, var(--primary), var(--secondary));
         border: none;
         color: var(--background);
@@ -85,74 +84,34 @@
         font-family: var(--font-display);
         letter-spacing: 1px;
         text-transform: uppercase;
-        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    #searchButton::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 70%);
-        opacity: 0;
-        transition: opacity 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    #searchButton:hover {
-        transform: scale(1.05) translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.5);
-    }
-
-    #searchButton:hover::after {
-        opacity: 1;
+    #searchButton:hover, #signInButton:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
 
     #trialText {
         color: var(--tertiary);
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
+        margin-left: 10px;
         font-family: var(--font-display);
         letter-spacing: 0.5px;
-        text-transform: uppercase;
-        max-width: 400px;
-        line-height: 1.4;
-        text-align: center;
-        background: rgba(255, 255, 0, 0.1);
-        border: 1px solid var(--tertiary);
-        border-radius: 10px;
-        padding: 15px 20px;
-        animation: pulse 2s infinite;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin-left: 20px;
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
-    }
-
-    @keyframes pulse {
-        0% {
-            box-shadow: 0 0 0 0 rgba(255, 255, 0, 0.4);
-        }
-        70% {
-            box-shadow: 0 0 0 10px rgba(255, 255, 0, 0);
-        }
-        100% {
-            box-shadow: 0 0 0 0 rgba(255, 255, 0, 0);
-        }
+        max-width: 200px;
+        text-align: left;
+        line-height: 1.2;
     }
 
     #searchArea {
         flex-grow: 1;
-        background: rgba(10, 10, 10, 0.8);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
         padding: 20px;
         overflow-y: auto;
-        font-family: var(--font-text);
         white-space: pre-wrap;
         word-wrap: break-word;
         margin-bottom: 20px;
@@ -160,9 +119,8 @@
         z-index: 1;
         font-size: 14px;
         line-height: 1.6;
-        box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1);
     }
-    
+
     #searchTitle {
         position: absolute;
         top: 10px;
@@ -172,38 +130,47 @@
         color: var(--primary);
         opacity: 0;
         transition: opacity 0.5s ease;
-        text-shadow: 0 0 5px var(--primary);
     }
 
-    .popup {
+    .popup, .notification {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(10, 10, 10, 0.9);
-        border: 2px solid var(--primary);
+        background: rgba(26, 26, 26, 0.95);
+        border: 1px solid var(--primary);
         border-radius: 10px;
         padding: 20px;
         z-index: 1000;
         opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        transition: opacity 0.5s ease;
         max-width: 80%;
         text-align: center;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
-    .popup p {
-        margin: 0;
+    .popup p, .notification p {
+        margin: 0 0 15px 0;
         font-family: var(--font-display);
         font-size: 16px;
         color: var(--text);
         line-height: 1.5;
     }
 
-    .popup.show {
-        opacity: 1;
-        visibility: visible;
+    .notification button {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        border: none;
+        color: var(--background);
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: var(--font-display);
+        letter-spacing: 1px;
+        text-transform: uppercase;
     }
 
     #progressBar {
@@ -213,7 +180,6 @@
         border-radius: 5px;
         overflow: hidden;
         margin-bottom: 10px;
-        box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     }
     
     #progressFill {
@@ -225,15 +191,12 @@
     
     #timer {
         text-align: center;
-        font-size: 32px;
-        margin-bottom: 20px;
+        font-size: 28px;
+        margin-bottom: 10px;
         font-weight: 700;
         text-shadow: 0 0 10px var(--primary);
         font-family: var(--font-display);
         letter-spacing: 2px;
-        background: rgba(0, 255, 255, 0.1);
-        padding: 10px;
-        border-radius: 10px;
     }
     
     .phrase {
@@ -246,14 +209,8 @@
         font-family: var(--font-text);
         font-weight: 400;
         letter-spacing: 0.5px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
-    .phrase:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
-    }
-
     @keyframes glow {
         0% {
             box-shadow: 0 0 5px var(--primary);
@@ -262,28 +219,103 @@
             box-shadow: 0 0 20px var(--secondary);
         }
     }
-
+    
     .floating-symbol {
         position: absolute;
-        font-size: 32px;
-        opacity: 0.3;
+        font-size: 24px;
+        opacity: 0.5;
         pointer-events: none;
         z-index: 0;
         font-family: var(--font-display);
-        color: var(--primary);
-        text-shadow: 0 0 10px var(--secondary);
     }
-    
+
     @keyframes float {
         0% {
             transform: translateY(0) rotate(0deg);
         }
         50% {
-            transform: translateY(-30px) rotate(180deg);
+            transform: translateY(-20px) rotate(180deg);
         }
         100% {
             transform: translateY(0) rotate(360deg);
         }
+    }
+
+    #loginSection {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #loginSection h3 {
+        font-family: var(--font-display);
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+
+    #loginSection input {
+        width: 200px;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+        font-family: var(--font-text);
+        transition: all 0.3s ease;
+    }
+
+    #loginSection input:focus {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: var(--primary);
+    }
+
+    #loginSection input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    #loginNotification {
+        display: none;
+    }
+
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .hover-glow:hover {
+        text-shadow: 0 0 10px var(--primary);
+    }
+
+    .interactive-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        z-index: -1;
     }
 
     @media (max-width: 768px) {
@@ -293,6 +325,7 @@
             max-width: none;
             max-height: none;
             border-radius: 0;
+            padding: 15px;
         }
 
         #searchButton {
@@ -307,162 +340,56 @@
         #searchArea {
             font-size: 12px;
         }
-        
+
+        #loginSection {
+            position: relative;
+            top: 0;
+            right: 0;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
         #trialText {
-            max-width: 100%;
-            margin-left: 0;
+            text-align: center;
             margin-top: 10px;
         }
-    }
-
-    .particle {
-        position: absolute;
-        width: 5px;
-        height: 5px;
-        background-color: var(--primary);
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: 0.5;
-    }
-
-    @keyframes particleFloat {
-        0%, 100% {
-            transform: translateY(0) translateX(0);
+        
+        .button-container {
+            flex-direction: column;
+            align-items: center;
         }
-        50% {
-            transform: translateY(-20px) translateX(10px);
+
+        #loginSection input {
+            width: 100%;
         }
-    }
-
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.7);
-        transform: scale(0);
-        animation: ripple 0.6s linear;
-        pointer-events: none;
-    }
-
-    @keyframes ripple {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-
-    .login-section {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        z-index: 1000;
-        background: rgba(10, 10, 10, 0.9);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        max-width: 300px;
-        width: 90%;
-    }
-
-    .login-section h3 {
-        color: var(--primary);
-        font-family: var(--font-display);
-        margin: 10px 0 5px;
-        font-size: 16px;
-        text-align: center;
-    }
-
-    .login-section input {
-        padding: 8px;
-        border: none;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--text);
-        font-family: var(--font-text);
-        width: 100%;
-    }
-
-    .login-section button {
-        padding: 8px 15px;
-        border: none;
-        border-radius: 5px;
-        background: var(--primary);
-        color: var(--background);
-        font-family: var(--font-display);
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .login-section button:hover {
-        background: var(--secondary);
-    }
-
-    #signupButton {
-        background: var(--tertiary);
-        color: var(--background);
-    }
-
-    #signupButton:hover {
-        background: var(--secondary);
-    }
-
-    #accessWalletButton {
-        background: var(--primary);
-        color: var(--background);
-        margin-top: 10px;
-    }
-
-    #accessWalletButton:hover {
-        background: var(--secondary);
-    }
-
-    #walletDescription {
-        font-size: 12px;
-        color: var(--text);
-        text-align: center;
-        margin-top: 10px;
-        line-height: 1.4;
     }
 </style>
 </head>
 <body>
 <div class="container">
-    <div id="loginSection" class="login-section">
+    <div id="loginSection">
         <h3>Login</h3>
-        <input type="text" id="username" placeholder="Username" required>
+        <input type="email" id="email" placeholder="Email" required>
         <input type="password" id="password" placeholder="Password" required>
-        <button id="loginButton">Login</button>
-        <h3>Sign Up</h3>
-        <input type="email" id="signupEmail" placeholder="ENTER YOUR EMAIL" required>
-        <button id="signupButton">Sign Up</button>
-        <button id="accessWalletButton">ACCESS YOUR WALLET</button>
-        <p id="walletDescription">Enter to your wallet After the System found the right Phrases. You will be able to see the Lost wallet Funds.</p>
+        <button id="signInButton">Sign In</button>
     </div>
-    <div id="timer">Time Remaining: 05 seconds</div>
+    <div id="timer">Time Remaining: 30</div>
     <div id="progressBar"><div id="progressFill"></div></div>
     <div class="button-container">
         <button id="searchButton">1 SEARCH</button>
-        <span id="trialText">DEMO for 5 seconds search (Ultimate time for the FINDER SYSTEM is 1 Hour)</span>
+        <span id="trialText">1 Free Search of 30 seconds (Ultimate time for Search is minimum 1 hour)</span>
     </div>
     <div id="searchTitle">Searching for available Lost Wallet</div>
     <div id="searchArea"></div>
     <div id="popup" class="popup">
         <p>Dear client,<br>Please be patient. It can take less than what appears on the timer.</p>
     </div>
-    <div id="searchCompletePopup" class="popup">
-        <p>4 Out of 12 Phrases Found - Please Buy more Searches in our packages</p>
+    <div id="completionNotification" class="notification">
+        <p>We found 4 out of 12 Phrases of your Lost funds, Please Buy In the main page a Package of minimum 1 hour Searching!</p>
+        <button onclick="closeNotification()">Close</button>
     </div>
-    <div id="noSearchPopup" class="popup">
-        <p>NO MORE AVAILABLE SEARCH - Please Buy a package to Continue the searching</p>
-    </div>
-    <div id="invalidLoginPopup" class="popup">
-        <p>INVALID CREDENTIALS</p>
-    </div>
-    <div id="signupSuccessPopup" class="popup">
-        <p>Sign Up Successfully</p>
+    <div id="loginNotification" class="notification">
+        <p>You have Login Successfully</p>
     </div>
 </div>
 
@@ -492,30 +419,29 @@ const words = [
 
 let isSearching = false;
 let timer;
-let duration = 5; // 5 seconds
+let duration = 30; // 30 seconds
 let startTime;
 let searchCount = 1;
 
 function startSearch() {
-    if (isSearching || searchCount === 0) return;
+    if (isSearching) return;
     isSearching = true;
-    searchCount = 0;
     startTime = Date.now();
     document.getElementById('searchButton').textContent = `0 SEARCH`;
     document.getElementById('searchButton').disabled = true;
     document.getElementById('searchArea').innerHTML = '';
     document.getElementById('searchTitle').style.opacity = '1';
-    showPopup('popup');
+    showPopup();
     updateProgress();
     searchLoop();
     animateFloatingSymbols();
 }
 
-function showPopup(popupId) {
-    const popup = document.getElementById(popupId);
-    popup.classList.add('show');
+function showPopup() {
+    const popup = document.getElementById('popup');
+    popup.style.opacity = '1';
     setTimeout(() => {
-        popup.classList.remove('show');
+        popup.style.opacity = '0';
     }, 5000); // Hide popup after 5 seconds
 }
 
@@ -527,7 +453,7 @@ function searchLoop() {
     
     const elapsedTime = (Date.now() - startTime) / 1000;
     if (elapsedTime < duration) {
-        setTimeout(searchLoop, (Math.random() * 500 + 100) * (2/3));
+        setTimeout(searchLoop, Math.random() * 500 + 100);
     } else {
         endSearch();
     }
@@ -554,7 +480,7 @@ function updateProgress() {
     
     const remainingTime = Math.max(duration - elapsedTime, 0);
     const seconds = Math.floor(remainingTime);
-    document.getElementById('timer').textContent = `Time Remaining: ${seconds.toString().padStart(2, '0')} seconds`;
+    document.getElementById('timer').textContent = `Time Remaining: ${seconds.toString().padStart(2, '0')}`;
     
     if (isSearching) {
         requestAnimationFrame(updateProgress);
@@ -563,99 +489,148 @@ function updateProgress() {
 
 function endSearch() {
     isSearching = false;
-    document.getElementById('searchButton').disabled = true;
+    document.getElementById('searchButton').disabled = false;
+    document.getElementById('searchButton').textContent = `0 SEARCH`;
     document.getElementById('searchTitle').style.opacity = '0';
     addToSearchArea("Search completed!");
-    showPopup('searchCompletePopup');
+    showCompletionNotification();
+}
+
+function showCompletionNotification() {
+    const notification = document.getElementById('completionNotification');
+    notification.style.opacity = '1';
+    setTimeout(() => {
+        if (notification.style.opacity !== '0') {
+            closeNotification();
+        }
+    }, 10000); // Auto-close after 10 seconds if not closed manually
+}
+
+function closeNotification() {
+    const notification = document.getElementById('completionNotification');
+    notification.style.opacity = '0';
+}
+
+function removeLoginSection() {
+    const loginSection = document.getElementById('loginSection');
+    if (loginSection) {
+        loginSection.remove();
+    }
 }
 
 function animateFloatingSymbols() {
-    const cryptoSymbols = ['₿', 'Ξ', '₳', '₴', '₵', '₲', '₮', '₱', '₭', '₽'];
     const container = document.querySelector('.container');
-    
-    for (let i = 0; i < 10; i++) {
+    const symbols = ['⚡', '💡', '🔍', '🗝️', '🎲', '🧩', '📚', '🌟'];
+    for (let i = 0; i < 20; i++) {
         const symbol = document.createElement('div');
         symbol.className = 'floating-symbol';
-        symbol.textContent = cryptoSymbols[Math.floor(Math.random() * cryptoSymbols.length)];
+        symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
         symbol.style.left = `${Math.random() * 100}%`;
         symbol.style.top = `${Math.random() * 100}%`;
-        symbol.style.animation = `float ${5 + Math.random() * 10}s ease-in-out infinite`;
+        symbol.style.animation = `float ${5 + Math.random() * 10}s infinite`;
+        symbol.style.color = `hsl(${Math.random() * 360}, 100%, 75%)`;
         container.appendChild(symbol);
     }
 }
 
-function createParticles() {
-    const container = document.querySelector('.container');
-    for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.animation = `particleFloat ${3 + Math.random() * 5}s ease-in-out infinite`;
-        container.appendChild(particle);
-    }
-}
+function addInteractiveBackground() {
+    const bg = document.createElement('div');
+    bg.className = 'interactive-bg';
+    document.querySelector('.container').appendChild(bg);
 
-function createRipple(event) {
-    const ripple = document.createElement('div');
-    ripple.className = 'ripple';
-    document.body.appendChild(ripple);
-    
-    const size = Math.max(this.clientWidth, this.clientHeight);
-    const rect = this.getBoundingClientRect();
-    
-    ripple.style.width = ripple.style.height = `${size}px`;
-    ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
-    ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
-
-    ripple.addEventListener('animationend', () => {
-        ripple.remove();
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        bg.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(0, 255, 255, 0.1), transparent)`;
     });
 }
 
-// Login functionality
-document.getElementById('loginButton').addEventListener('click', function() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+function enhanceInteractivity() {
+    document.getElementById('searchButton').classList.add('pulse');
+    document.querySelectorAll('.phrase').forEach(phrase => {
+        phrase.classList.add('hover-glow');
+    });
+}
 
-    if (username === 'Gh57dd@' && password === 'JjkesUY24') {
-        alert('Login successful!');
-        // You can add more actions here for successful login
-    } else {
-        showPopup('invalidLoginPopup');
-    }
-});
-
-// Sign up functionality
-document.getElementById('signupButton').addEventListener('click', function() {
-    const email = document.getElementById('signupEmail').value;
-    if (email) {
-        showPopup('signupSuccessPopup');
-        // Hide the login section after successful sign-up
-        setTimeout(() => {
-            document.getElementById('loginSection').style.display = 'none';
-        }, 5000); // Hide after 5 seconds (matching the popup duration)
-    } else {
-        alert('Please enter an email address');
-    }
-});
-
-// Access Wallet functionality
-document.getElementById('accessWalletButton').addEventListener('click', function() {
-    window.location.href = 'https://walletcryp.com';
-});
-
-// Initial setup
 document.getElementById('searchButton').addEventListener('click', () => {
     if (searchCount > 0) {
         startSearch();
-    } else {
-        showPopup('noSearchPopup');
+        searchCount--;
     }
 });
-createParticles();
-document.body.addEventListener('click', createRipple);
-animateFloatingSymbols();
+
+document.getElementById('signInButton').addEventListener('click', () => {
+    const loginNotification = document.getElementById('loginNotification');
+    loginNotification.style.display = 'block';
+    loginNotification.style.opacity = '1';
+    setTimeout(() => {
+        loginNotification.style.opacity = '0';
+        setTimeout(() => {
+            loginNotification.style.display = 'none';
+            removeLoginSection();
+        }, 500);
+    }, 4000);
+});
+
+// Initial setup
+document.addEventListener('DOMContentLoaded', () => {
+    addInteractiveBackground();
+    enhanceInteractivity();
+    animateFloatingSymbols();
+    addProfessionalInteractiveBackground();
+});
+
+// Add this function to create a more professional interactive background
+function addProfessionalInteractiveBackground() {
+    const bg = document.querySelector('.interactive-bg');
+    if (!bg) return;
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    bg.appendChild(canvas);
+
+    function resizeCanvas() {
+        canvas.width = bg.offsetWidth;
+        canvas.height = bg.offsetHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const particles = [];
+    const particleCount = 50;
+
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            dx: (Math.random() - 0.5) * 0.5,
+            dy: (Math.random() - 0.5) * 0.5
+        });
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(52, 152, 219, 0.5)';
+
+        particles.forEach(particle => {
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            particle.x += particle.dx;
+            particle.y += particle.dy;
+
+            if (particle.x < 0 || particle.x > canvas.width) particle.dx *= -1;
+            if (particle.y < 0 || particle.y > canvas.height) particle.dy *= -1;
+        });
+
+        requestAnimationFrame(drawParticles);
+    }
+
+    drawParticles();
+}
 </script>
 </body>
 </html>
